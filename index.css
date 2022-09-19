@@ -17,7 +17,7 @@
     background-color: #e4a341;
   }
   .footer-bottom {
-    position: sticky;
+    position: absolute;
     text-align: center;
   }
   .footer-bottom-p {
