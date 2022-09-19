@@ -1,18 +1,21 @@
 .login {
-    margin-left: 1rem;
+  margin-left: 1rem;
 }
 
 .logo {
-    margin-right: 0.5rem;
+  margin-right: 0.5rem;
 }
-#side-menu{
-    min-width:180px;
-    max-width:180px;
+
+#side-menu {
+  min-width: 180px;
+  max-width: 180px;
 }
-.content{
-    width: 100%;
-    min-height: 100%;
+
+.content {
+  width: 100%;
+  min-height: 100%;
 }
+
 .footer-bottom-bg-color {
     background-color: #e4a341;
   }
