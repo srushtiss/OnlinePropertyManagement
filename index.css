@@ -1,0 +1,28 @@
+.login {
+    margin-left: 1rem;
+}
+
+.logo {
+    margin-right: 0.5rem;
+}
+#side-menu{
+    min-width:180px;
+    max-width:180px;
+}
+.content{
+    width: 100%;
+    min-height: 100%;
+}
+.footer-bottom-bg-color {
+    background-color: #e4a341;
+  }
+  .footer-bottom {
+    position: sticky;
+    text-align: center;
+  }
+  .footer-bottom-p {
+    color: #eee;
+  }
+  .time-font{
+    font-size: small;
+  }
