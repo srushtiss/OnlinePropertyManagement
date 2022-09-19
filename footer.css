@@ -1,0 +1,13 @@
+  .footer-bottom-bg-color {
+    background-color: #e4a341;
+  }
+  .footer-bottom {
+    position: sticky;
+    text-align: center;
+  }
+  .footer-bottom-p {
+    color: #eee;
+  }
+  .time-font{
+    font-size: small;
+  }
