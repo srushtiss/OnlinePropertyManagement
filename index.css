@@ -20,7 +20,7 @@
     background-color: #e4a341;
   }
   .footer-bottom {
-    position: absolute;
+    position: sticky;
     text-align: center;
   }
   .footer-bottom-p {
