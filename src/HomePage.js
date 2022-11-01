@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import TutorCards from "./card";
 import properties from "./properties";
+import './HomePage.css'
 
 
 function HomePage() {
@@ -32,7 +33,7 @@ function HomePage() {
             <li class="nav-item">
               <a class="nav-link" href="#">My Reservations</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" style={{padding:"0px 10px 0px 0px"}}>
               <div class="btn-group">
                 <button type="button" class="btn btn-outline-dark dropdown-toggle" data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false">
@@ -46,7 +47,15 @@ function HomePage() {
               </div>
             </li>
           </ul>
-          <form class="form-inline my-2 my-lg-0">
+          
+          <div class="login" style={{paddingLeft:"800px"}}>
+            <button type="button" class="btn btn-outline-danger">Log In</button>
+          </div>
+          
+        </div>
+      </nav>
+      <div class="search-form" style={{display:"flex",alignContent:"center",justifyContent:"center"}}>
+      <form class="form-inline my-2 my-lg-0">
             <input onChange={(event) => {
               if (event.target.value == ""){
                 setTitle(properties)
@@ -56,14 +65,10 @@ function HomePage() {
           setSearchText(event.target.value)
         }
          
-        }} type="search" placeholder="Search Here" aria-label="Search" />
-            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+        }} type="search"  style={{borderRadius:"10px"}} placeholder="Search Here" aria-label="Search" />
+            
           </form>
-          <div class="login">
-            <button type="button" class="btn btn-outline-danger">Log In</button>
           </div>
-        </div>
-      </nav>
       <br />
       <br />
       <br />
@@ -97,12 +102,6 @@ function HomePage() {
                   </li>
                 </ul>
               </div>
-              {/* <div class="card" style={{ width: "18rem" }}>
-                <img src="addvertisement.png" class="card-img-top" alt="advertisement" />
-                <div class="card-body">
-                  <p class="card-text">Now save 30% off on booking 2 weeks before arrival</p>
-                </div>
-              </div> */}
             </div>
           </div>
           <div class="col-md-9">
@@ -125,7 +124,7 @@ function HomePage() {
           </div>
         </div>
       </div>
-      <div class="footer fixed-bottom">
+      <div class="footer relative-bottom">
         <div class="footer-bottom-bg-color">
           <footer class="footer-bottom">
             <div class="mt-2">
