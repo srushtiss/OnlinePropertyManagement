@@ -29,3 +29,12 @@
   .time-font{
     font-size: small;
   }
+  .gridWrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 10fr);
+    gap: 10px;
+  }
+  .blockimg {
+    width: 100px;
+    height: 200px;
+ }
