@@ -1,6 +1,6 @@
 const express = require('express');
 
-const Property = require('../models/property');
+const Property = require('../models/property.model');
 const Reservation = require('../models/reservation');
 const jwt = require('../config/jwt');
 
@@ -52,7 +52,7 @@ module.exports = router;
 const express = require('express');
 
 const User = require('../models/user');
-const Property = require('../models/property');
+const Property = require('../models/property.model');
 const jwt = require('../config/jwt');
 
 const router = express.Router();
@@ -99,7 +99,7 @@ module.exports = router;
 
 const express = require('express');
 
-const Property = require('../models/property');
+const Property = require('../models/property.model');
 const jwt = require('../config/jwt');
 
 const router = express.Router();
