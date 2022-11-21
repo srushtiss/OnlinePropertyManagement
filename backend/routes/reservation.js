@@ -46,17 +46,6 @@ router.get('/getReservations', jwt.validateToken, (req, res, next) => {
     });
 });
 
-module.exports = router;
-
-
-const express = require('express');
-
-const User = require('../models/user');
-const Property = require('../models/property.model');
-const jwt = require('../config/jwt');
-
-const router = express.Router();
-
 // Delete property.
 router.delete('/deleteProperty/:id', jwt.validateToken, (req, res, next) => {
     const userId = req.session.userId;
@@ -93,16 +82,6 @@ router.delete('/deleteUser', jwt.validateToken, (req, res, next) => {
         error: err.message 
     }));
 });
-
-module.exports = router;
-
-
-const express = require('express');
-
-const Property = require('../models/property.model');
-const jwt = require('../config/jwt');
-
-const router = express.Router();
 
 router.patch('/updateProperty/:id', jwt.validateToken, (req, res, next) => {
     const userId = req.session.userId;
