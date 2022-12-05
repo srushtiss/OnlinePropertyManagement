@@ -1,0 +1,33 @@
+.content {
+    width: 100%;
+    min-height: 100%;
+  }
+
+.input-group-text{
+    width:100px;
+    margin-right: 0.5rem;
+}
+
+.input-group-append{
+    color: rgb(0, 33, 179)
+}
+
+
+label {
+    display:inline-block;
+    /* margin-left: 10px; */
+    margin-right: 10px;
+  }
+
+.Auth-form-content, .Auth-form-title, .signContent{
+    text-align: center;  
+    /* padding-top: 2rem; */
+    padding-bottom: 1rem;
+}
+
+.submitBtn{
+    text-align: center;  
+    margin: auto;
+    width: 20%;
+    padding: 10px;
+}

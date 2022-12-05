@@ -50,12 +50,8 @@ function MyVerticallyCenteredModal(props) {
 }
 
 
-function TutorCards(props) {
-    let { name = "ABC", courseName = "English", img, rating, location, aboutMe, comments = [], userLoggedIn } = props
+function PropertyCards(props) {
     const [modalShow, setModalShow] = useState(false);
-    const [timerModal, setTimeModal] = useState(false);
-    const [user, setUser] = useState(props?.user)
-    console.log(img)
     return (
         <>
             <MyVerticallyCenteredModal
@@ -63,11 +59,6 @@ function TutorCards(props) {
                 onHide={() => setModalShow(false)}
                 {...props}
             />
-            {/* <TimeModal
-                show={timerModal}
-                onHide={() => setTimeModal(false)}
-                name={'Set Time for appoinment with' + name}
-            /> */}
 
             <div className="col g-5">
                 <div class="card" style={{ width: "18rem" }}>
@@ -82,14 +73,6 @@ function TutorCards(props) {
                             <h6 class="card-title"><b>{props.title}</b></h6>
                             <p class="card-text">{props.city}</p>
                         </div>
-                        {/* <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only"></span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only"></span>
-                        </a> */}
                     </div>
 
                     <div class="card-body">
@@ -103,4 +86,4 @@ function TutorCards(props) {
     );
 }
 
-export default TutorCards
+export default PropertyCards
