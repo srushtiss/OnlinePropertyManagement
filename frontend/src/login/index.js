@@ -4,6 +4,7 @@ import { objectToArray } from "./"
 import { redirect, useNavigate } from "react-router-dom";
 import "./index.css"
 import validator from 'validator'
+import { useCookies } from "react-cookie";
 
 
 
@@ -15,6 +16,8 @@ export default function (props) {
   const [phone, setPhone] = useState("")
   const [password, setPassword] = useState("")
   const [type, setType] = useState("")
+  const [username, setUserName, removeUserName] = useCookies(['userName']);
+  const [userType, setUserType, removeUserType] = useCookies(['userType']);
 
   const navigate = useNavigate()
   const changeAuthMode = () => {
@@ -53,24 +56,43 @@ export default function (props) {
 
 
   const submit = () => {
+
+
     console.log("here")
     if (authMode === 'signin' && type === 'user') UserLogin(email, password).then((res) => {
       console.log(res.result)
-      if (res.result === true) navigate('/home', { state: { username: res.username } })
+      if (res.result === true) {
+        setUserName(email)
+        setUserType("user")
+        navigate('/', { state: { username: res.username } })
+      }
       else alert('Failed authentication')
     })
     if (authMode === 'signin' && type === 'host') HostLogin(email, password).then((res) => {
       console.log(res.result)
-      if (res.result === true) navigate('/home', { state: { username: res.username } })
+
+      if (res.result === true) {
+        setUserName(email)
+        setUserType("host")
+        navigate('/', { state: { username: res.username } })
+      }
       else alert('Failed authentication')
     })
     if (authMode === 'signup' && type === 'host') HostSignUp(email, password).then((res) => {
       console.log(res.result)
-      if (res.result === true) navigate('/home', { state: { username: res.username } })
+      if (res.result === true) {
+        setUserName(email)
+        setUserType("host")
+        navigate('/', { state: { username: res.username } })
+      }
       else alert('Failed authentication')
     })
     else UserSignUp(firstName, lastName, email, phone, password).then((res) => {
-      if (res.result === true) navigate('/home', { state: { username: res.username } })
+      if (res.result === true) {
+        setUserName(email)
+        setUserType("user")
+        navigate('/', { state: { username: res.username } })
+      }
       else alert('Failed authentication')
     })
   }

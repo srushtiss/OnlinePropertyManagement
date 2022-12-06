@@ -1,10 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
+import { AddToFavorites } from "../ServerApi"
+import { useCookies } from "react-cookie";
 
 
 
 function MyVerticallyCenteredModal(props) {
+
     return (
         <Modal
             {...props}
@@ -51,7 +54,19 @@ function MyVerticallyCenteredModal(props) {
 
 
 function PropertyCards(props) {
+    const [favorite, setFavorite] = useState("Favorite Me")
     const [modalShow, setModalShow] = useState(false);
+    const [username, setCookie, removeCookie] = useCookies(['userName']);
+
+    const addFavorite = (props) => {
+        AddToFavorites(username.userName, props.title).then((res) => {
+            if (res.result === true) {
+                setFavorite("Added!")
+            }
+            else alert('Failed authentication')
+          })
+    
+    }
     return (
         <>
             <MyVerticallyCenteredModal
@@ -60,8 +75,8 @@ function PropertyCards(props) {
                 {...props}
             />
 
-            <div className="col g-5">
-                <div class="card" style={{ width: "18rem" }}>
+            <div className="col g-5" >
+                <div class="card" style={{ width: "18rem", marginBottom: "2rem", marginRight: "2rem" }}>
 
                     <div id="carouselExampleControls" class="card-img-top carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
@@ -76,8 +91,8 @@ function PropertyCards(props) {
                     </div>
 
                     <div class="card-body">
-                        <a href="#" onClick={() => { setModalShow(true) }} class="card-link">View Property</a>
-                        {/* <a href="#" class="card-link">Quick Reserve</a> */}
+                        <a href="#" onClick={() => { setModalShow(true) }} class="btn btn-outline-secondary card-link">View Property</a>
+                        <a href="#" onClick={(e) => { addFavorite(props, username.userName) }} class="btn btn-outline-secondary card-link">{favorite}</a>
                     </div>
                 </div>
 

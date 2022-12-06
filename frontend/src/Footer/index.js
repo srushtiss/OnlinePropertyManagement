@@ -19,7 +19,9 @@ function Footer() {
                   <p>
                       <a href="/login" className="text-white" style={{textDecoration: 'None'}}>Login/SignUp</a>
                   </p>
-
+                  <p>
+                      <a href="/registerproperty" className="text-white" style={{textDecoration: 'None'}}>Host your Property</a>
+                  </p>
               </div>
               <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
                   <h5 className="text-uppercase mb-4 font-weight-bold" style={{textDecoration: 'None'}}>Contact</h5>

@@ -32,37 +32,8 @@ function HomePage() {
         </div>
       </div>
       <br />
-
-
-      <div class="container-fluid main-body pt-3">
-        <div class="row">
-          <div class="side-menu col-md-3">
-            <div class="side-menu d-flex flex-column" id="side-menu">
-              <div class="side-menu content" s>
-                <ul class="nav flex-column">
-                  <li class="nav-item">
-                    <a class="nav-link d-block px-2 py-2" href="#">Host your home</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link d-block px-2 py-2" href="#">Explore your spaces</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link d-block px-2 py-2" href="#">Our Services</a>
-                  </li>
-
-                  <li class="nav-item">
-                    <a class="nav-link d-block px-2 py-2" href="#">Notifications</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link d-block px-2 py-2" href="#">Contact Us</a>
-                  </li>
-
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-9">
-
+        <div class="row justify-content-center">
+          <div class="col-md-10 properties">
             <div class="container-fluid">
               <div class="container-fluid text-center">
                 <div class="row">
@@ -80,8 +51,7 @@ function HomePage() {
           </div>
         </div>
       </div>
-      
-    </div>
+
   )
 }
 
