@@ -91,7 +91,7 @@ export default function (props) {
       if (res.result === true) {
         setUserName(email)
         setUserType("user")
-        navigate('/', { state: { username: res.username } })
+        // navigate('/', { state: { username: res.username } })
       }
       else alert('Failed authentication')
     })

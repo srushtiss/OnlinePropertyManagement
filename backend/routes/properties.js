@@ -8,6 +8,7 @@ router.route('/').get((req,res)=>{
 })
 
 router.route('/add').post((req,res)=>{
+    console.log(JSON.stringify(req.fields))
     const name=req.body.name
     const city=req.body.city
     const type=req.body.type
@@ -25,7 +26,7 @@ router.route('/add').post((req,res)=>{
 
     newProperty.save()
     .then(()=>res.json('New property added'))
-    .catch((err)=>res.status(400).json('Proeprty Added'))
+    .catch((err)=>res.status(400).json(err))
 })
 
 router.route('/:id').get((req,res)=>{

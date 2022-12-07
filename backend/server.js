@@ -11,6 +11,11 @@ const port=process.env.PORT || 3000
 const app=express()
 app.use(express.json())
 app.use(cors())
+// const formidable = require('express-formidable');
+ 
+ 
+// app.use(formidable());
+
 
 const uri=process.env.MONGO_URI
 mongoose.connect(uri,{
