@@ -16,7 +16,7 @@ export const HostLogin = async ({ email, passHash }) => {
 }
 
 export const HostSignUp = async ({ firstName, lastName, phone, email, passHash }) => {
-  return await callApi({ endpoint: 'host', method: 'post', body: { firstName: String(firstName), lastName: String(lastName), email: String(email), phone: String(phone), passHash: String(sha1(passHash)) } })
+  return await callApi({ endpoint: 'host/add', method: 'post', body: { firstName: String(firstName), lastName: String(lastName), email: String(email), phone: String(phone), passHash: String(sha1(passHash)) } })
 }
 
 export const RegisterHostProperty = async ({ email, title, city, category, description, nightly_fee, cleaning_fee, service_fee, amenities, bedrooms, img, map_address }) => {

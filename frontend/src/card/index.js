@@ -24,21 +24,21 @@ function MyVerticallyCenteredModal(props) {
                 <div style={{ display: 'flex', flexDirection: 'row', }}>
                     <img src={props.img} height={150} />
                     <div style={{ padding: 10, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                        <div class="card-body">
+                        <div className="card-body">
                             <p >{props.description}</p>
                         </div>
-                        <ul class="list-group list-group-flush">
+                        <ul className="list-group list-group-flush">
 
-                            <li class="list-group-item"><b>Location: </b>{props.city}</li>
-                            <li class="list-group-item"><b>Type: </b>{props.category}</li>
-                            <li class="list-group-item"><b>Price/night: </b>{props.nightly_fee}</li>
-                            <li class="list-group-item"><b>Cleaning Fee: </b>{props.cleaning_fee}</li>
-                            <li class="list-group-item"><b>Service Fee: </b>{props.service_fee}</li>
-                            <li class="list-group-item"><b>Amenities: </b>{props.amenities}</li>
-                            <li class="list-group-item"><b>Bedrooms: </b>{props.bedrooms}</li>
-                            {/* <p class="card-text"><b>Price/night: </b>{props.map_address}</p> */}
-                            <li class="list-group-item"><b>Price/night: </b>{props.nightly_fee}</li>
-                            <li class="list-group-item"><b>Location: </b>{props.city}</li>
+                            <li className="list-group-item"><b>Location: </b>{props.city}</li>
+                            <li className="list-group-item"><b>Type: </b>{props.category}</li>
+                            <li className="list-group-item"><b>Price/night: </b>{props.nightly_fee}</li>
+                            <li className="list-group-item"><b>Cleaning Fee: </b>{props.cleaning_fee}</li>
+                            <li className="list-group-item"><b>Service Fee: </b>{props.service_fee}</li>
+                            <li className="list-group-item"><b>Amenities: </b>{props.amenities}</li>
+                            <li className="list-group-item"><b>Bedrooms: </b>{props.bedrooms}</li>
+                            {/* <p className="card-text"><b>Price/night: </b>{props.map_address}</p> */}
+                            <li className="list-group-item"><b>Price/night: </b>{props.nightly_fee}</li>
+                            <li className="list-group-item"><b>Location: </b>{props.city}</li>
                         </ul>
                     </div>
                 </div>
@@ -87,17 +87,17 @@ function PropertyCards(props) {
             />
 
             <div className="col g-5" >
-                <div class="card" style={{ width: "18rem", marginBottom: "2rem", marginRight: "2rem" }}>
+                <div className="card" style={{ width: "18rem", marginBottom: "2rem", marginRight: "2rem" }}>
 
-                    <div id="carouselExampleControls" class="card-img-top carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img class="d-block w-100 blockimg" src={props.img} alt="First slide" />
+                    <div id="carouselExampleControls" className="card-img-top carousel slide" data-ride="carousel">
+                        <div className="carousel-inner">
+                            <div className="carousel-item active">
+                                <img className="d-block w-100 blockimg" src={props.img} alt="First slide" />
                             </div>
                         </div>
-                        <div class="card-body">
-                            <h6 class="card-title"><b>{props.title}</b></h6>
-                            <p class="card-text">{props.city}</p>
+                        <div className="card-body">
+                            <h6 className="card-title"><b>{props.title}</b></h6>
+                            <p className="card-text">{props.city}</p>
                         </div>
                     </div>
 
