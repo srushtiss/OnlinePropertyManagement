@@ -48,6 +48,7 @@ function NavBarTop() {
                 <div className="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
                   <LoginButton />
                   <a className="dropdown-item" href="/reservations">My Reservations</a>
+                  <a className="dropdown-item" href="/favourites">My Favourites</a>
                 </div>
               </li>
             </ul>

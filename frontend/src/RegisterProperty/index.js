@@ -4,6 +4,7 @@ import { objectToArray } from "./"
 import { redirect, useNavigate } from "react-router-dom";
 import "./index.css"
 import validator from 'validator'
+import axios from 'axios'
 import { useCookies } from "react-cookie";
 
 
@@ -25,10 +26,31 @@ function RegisterProperty() {
 
 
   const submit = () => {
+    // const property = {
+    //   title: this.state.title,
+    //   city:this.state.city,
+    //   category:this.state.category,
+    //   description:this.state.description,
+    //   nightly_fee:this.state.nightly_fee,
+    //   cleaning_fee:this.state.cleaning_fee,
+    //   service_fee:this.state.service_fee,
+    //   amenities:this.state.amenities,
+    //   bedrooms:this.state.bedrooms,
+    //   img:this.state.img,
+    //   map_address:this.state.map_address
+    // }
 
-    console.log("here")
+
+    // console.log(property)
+
+   
+
+    
+   
+
     RegisterHostProperty({email:cookies.userEmail, title:title, city:city, category:category, description:description, nightly_fee:nightly_fee, cleaning_fee:cleaning_fee, service_fee:service_fee, amenities:amenities, bedrooms:bedrooms, img:"sad", map_address:"asd"}).then((res) => {
       if (res.result === true) {
+
         navigate('/home')
       }
       else alert('Failed to host property')
@@ -130,7 +152,7 @@ function RegisterProperty() {
               type="file"
               className="form-control"
               placeholder="Image"
-              onChange={(e) => setImg(e.target.value)}
+              onChange={(e) => setImg(e.target.files)}
               id="validation" required />
           </div>
           <div className="col-md-10">

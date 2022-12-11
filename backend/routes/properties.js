@@ -1,5 +1,7 @@
 const router=require('express').Router()
 const Property=require('../models/property.model')
+const multer=require('multer')
+const upload=multer({dest:'uploads/'})
 
 router.route('/').get((req,res)=>{
     Property.find()
@@ -18,7 +20,7 @@ router.route('/add').post((req,res)=>{
     const service_fee=Number(req.body.service_fee)
     const amenities=req.body.amenities
     const bedrooms=Number(req.body.bedrooms)
-    const img=req.body.img
+    const img=req.file
     const nightly_fee=Number(req.body.nightly_fee)
     const description=req.body.description
 
