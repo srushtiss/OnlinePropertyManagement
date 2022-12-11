@@ -52,11 +52,51 @@ function MyVerticallyCenteredModal(props) {
     );
 }
 
+function RatingWindow(props){
+const [rating,setRating]=useState("")
+const [review,setReview]=useState("")
+
+    return (
+        <Modal
+            {...props}
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+        >
+            <Modal.Header closeButton>
+                <Modal.Title id="contained-modal-title-vcenter">
+                    {props.title} details
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <div style={{ display: 'flex', flexDirection: 'row', }}>
+                    <div style={{ padding: 10, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                       <form>
+                        <input type="number" max="5" placeholder='Rating (1 to 5)' onChange={(e)=>setRating(e.target.value)}></input>
+                        <br></br>
+                        <textarea placeholder="Type your reviews here" onChange={(e)=>setReview(e.target.value)}></textarea>
+                       </form>
+                    </div>
+                </div>
+
+
+            </Modal.Body>
+            <Modal.Footer>
+                <Button onClick={()=>{
+                    localStorage.setItem(props.title,[rating,review])
+                }} type="submit">Submit</Button>
+            </Modal.Footer>
+        </Modal>
+    );
+}
+
 
 function PropertyCards(props) {
     // const [favorite, setFavorite] = useState("Favorite Me")
     const [modalShow, setModalShow] = useState(false);
     const [username, setCookie, removeCookie] = useCookies(['userName']);
+    const [favourites, setFavourites] = useState([]);
+    const [ratingWindnow,setRatingWindow]=useState(false)
 
     // const addFavorite = (props) => {
     //     AddToFavorites(username.userName, props.title).then((res) => {
@@ -67,14 +107,16 @@ function PropertyCards(props) {
     //       })
     
     // }
-    const toggleFavorite=()=>{
-        if(document.getElementById('fav-btn').textContent==="Favourite"){
-            localStorage.setItem("fav-property",props.title)
-            document.getElementById("fav-btn").textContent="Remove fav"
+    const toggleFavorite=(property)=>{
+        if(document.getElementById('fav-btn').textContent==="Add to Favourite"){
+            const newFavouriteList = [...favourites, property];
+		    setFavourites(newFavouriteList);
+            localStorage.setItem('fav-property',newFavouriteList)
+            document.getElementById("fav-btn").textContent="Remove Favourite"
         }
         else{
             localStorage.removeItem("fav-property")
-            document.getElementById("fav-btn").textContent="Favourite"
+            document.getElementById("fav-btn").textContent="Add to favourite"
         }
 
     }
@@ -83,6 +125,11 @@ function PropertyCards(props) {
             <MyVerticallyCenteredModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
+                {...props}
+            />
+            <RatingWindow
+                show={ratingWindnow}
+                onHide={() => setRatingWindow(false)}
                 {...props}
             />
 
@@ -98,12 +145,14 @@ function PropertyCards(props) {
                         <div className="card-body">
                             <h6 className="card-title"><b>{props.title}</b></h6>
                             <p className="card-text">{props.city}</p>
+                            <p className='card-text'>Rating & Reviews : {localStorage.getItem(props.title)}</p>
                         </div>
                     </div>
 
                     <div class="card-body">
                         <a href="#" onClick={() => { setModalShow(true) }} class="btn btn-outline-secondary card-link">View Property</a>
-                        <button href="#" onClick={(e) => { toggleFavorite()}} id="fav-btn" class="btn btn-outline-secondary card-link">Favourite</button>
+                        <a href="#"  onClick={()=>{setRatingWindow(true)}} class="btn btn-outline-secondary card-link">Rate Property</a>
+                        <button href="#" onClick={(e) => { toggleFavorite()}} id="fav-btn" class="btn btn-outline-secondary card-link">Add to Favourite</button>
                     </div>
                 </div>
 
