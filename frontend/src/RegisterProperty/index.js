@@ -4,6 +4,7 @@ import { objectToArray } from "./"
 import { redirect, useNavigate } from "react-router-dom";
 import "./index.css"
 import validator from 'validator'
+import axios from 'axios'
 import { useCookies } from "react-cookie";
 
 
@@ -27,9 +28,23 @@ function RegisterProperty() {
   const submit = (event) => {
     event.preventDefault();
 
+    const formData=new FormData();
+    formData.append('title',title)
+    formData.append('city',city)
+    formData.append('category',category)
+    formData.append('description',description)
+    formData.append('nightly_fee',nightly_fee)
+    formData.append('cleaning_fee',cleaning_fee)
+    formData.append('service_fee',service_fee)
+    formData.append('amenities',amenities)
+    formData.append('bedrooms',bedrooms)
+    formData.append('img',img)
+    formData.append('map_address',map_address)
+
     console.log("here")
     RegisterHostProperty({ email: cookies.userEmail, title: title, city: city, category: category, description: description, nightly_fee: nightly_fee, cleaning_fee: cleaning_fee, service_fee: service_fee, amenities: amenities, bedrooms: bedrooms, img: "sad", map_address: "asd" }).then((res) => {
-
+      axios.post('http://localhost:4000/properties/add',formData)
+      .then((res)=>console.log(res.data))
       if (res.message === "New property added") {
         navigate('/home')
       }
@@ -131,9 +146,10 @@ function RegisterProperty() {
             <label htmlFor="validation" className="form-label">Image</label>
             <input
               type="file"
+              multiple
               className="form-control"
               placeholder="Image"
-              onChange={(e) => setImg(e.target.value)}
+              onChange={(e) => setImg(e.target.files)}
               id="validation" required />
           </div>
           <div className="col-md-10">
