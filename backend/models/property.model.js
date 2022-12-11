@@ -42,6 +42,9 @@ const propertySchema = new mongoose.Schema({
     },
     description: {
         type: String,
+    },
+    deleted: {
+        type: String,
     }
 });
 

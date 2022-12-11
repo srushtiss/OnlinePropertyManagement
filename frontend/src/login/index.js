@@ -5,6 +5,8 @@ import { redirect, useNavigate } from "react-router-dom";
 import "./index.css"
 import validator from 'validator'
 import { useCookies } from "react-cookie";
+import { ReactSession }  from 'react-client-session';
+
 
 
 
@@ -17,8 +19,12 @@ export default function (props) {
   const [phone, setPhone] = useState("")
   const [password, setPassword] = useState("")
   const [type, setType] = useState("")
-  const [cookies, setCookie] = useCookies(['user']);
+  // const [cookies, setCookie] = useCookies(['user']);
+  // const [userType, setUserType] = useCookies(['userType']);
+  // const [user, setUser] = useCookies(['userName']);
 
+  // setUserType("userType", "",{ path: '/' });
+  // setUser("userType", "",{ path: '/' });
 
   const navigate = useNavigate()
   const changeAuthMode = () => {
@@ -62,17 +68,23 @@ export default function (props) {
 
     if (authMode === 'signin' && type === 'user') UserLogin({ email: email, passHash: password }).then((res) => {
       console.log("res ",res.error)
-      setCookie('userType', "user", { path: '/' });
-      setCookie('userEmail', email, { path: '/' });
+      // setCookie('userType', "user", { path: '/' });
+      // setCookie('userEmail', email, { path: '/' });
+      // setUserType("userType", "user",{ path: '/' });
+      // setUser("userType", email,{ path: '/' });
+      ReactSession.set("userEmail", email);
+      ReactSession.set("userType", "user");
       navigate('/home')
     })
     .catch((err) =>{
       alert('Failed authentication')
     })
     if (authMode === 'signin' && type === 'host') HostLogin({ email: email, passHash: password }).then((res) => {
-      console.log(res.result)
-      setCookie('userType', "user", { path: '/' });
-      setCookie('userEmail', email, { path: '/' });
+      console.log(res)
+      // setCookie('userType', "host", { path: '/' });
+      // setCookie('userEmail', email, { path: '/' });
+      ReactSession.set("userEmail", email);
+      ReactSession.set("userType", "host");
       navigate('/home')
     })
     .catch((err) =>{
@@ -80,16 +92,16 @@ export default function (props) {
     })
     if (authMode === 'signup' && type === 'host') HostSignUp({ firstName: firstName, lastName: lastName, email: email, phone: phone, passHash: password }).then((res) => {
       console.log(res.result)
-      setCookie('userType', "user", { path: '/' });
-      setCookie('userEmail', email, { path: '/' });
+      // setCookie('userType', "host", { path: '/' });
+      // setCookie('userEmail', email, { path: '/' });
       navigate('/home')
     })
     .catch((err) =>{
       alert('Failed authentication')
     })
     if (authMode === 'signup' && type === 'user') UserSignUp({ firstName: firstName, lastName: lastName, email: email, phone: phone, passHash: password }).then((res) => {
-      setCookie('userType', "user", { path: '/' });
-      setCookie('userEmail', email, { path: '/' });
+      // setCookie('userType', "user", { path: '/' });
+      // setCookie('userEmail', email, { path: '/' });
       navigate('/home')
     })
     .catch((err) =>{

@@ -5,6 +5,7 @@ import { redirect, useNavigate } from "react-router-dom";
 import "./index.css"
 import validator from 'validator'
 import { useCookies } from "react-cookie";
+import { ReactSession } from 'react-client-session';
 
 
 function RegisterProperty() {
@@ -26,18 +27,22 @@ function RegisterProperty() {
 
   const submit = (event) => {
     event.preventDefault();
+    let userEmail = ReactSession.get("userEmail");
 
     console.log("here")
-    RegisterHostProperty({ email: cookies.userEmail, title: title, city: city, category: category, description: description, nightly_fee: nightly_fee, cleaning_fee: cleaning_fee, service_fee: service_fee, amenities: amenities, bedrooms: bedrooms, img: "sad", map_address: "asd" }).then((res) => {
-
-      if (res.message === "New property added") {
+    RegisterHostProperty({ email: userEmail, title: title, city: city, category: category, description: description, nightly_fee: nightly_fee, cleaning_fee: cleaning_fee, service_fee: service_fee, amenities: amenities, bedrooms: bedrooms, img: "sad", map_address: "asd", deleted:"false" })
+      .then((res) => {
+        alert("New property added!!")
         navigate('/home')
-      }
-      else alert('Failed to host property')
-    })
+      })
+      .catch((err) => {
+        alert('Failed authentication')
+      })
     console.log("here")
   }
-  if (cookies.userType === "host") {
+  let usertype = ReactSession.get("userType");
+
+  if (usertype === "host") {
     return (
       <>
         <form className="row g-2 needs-validation justify-content-center" novalidate onSubmit={submit}>

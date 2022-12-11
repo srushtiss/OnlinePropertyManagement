@@ -12,8 +12,9 @@ function HomePage() {
     let ignore = false;
     
     if (!ignore)  GetProperties().then((res)=>{
-      setTitle(res)
-      console.log("Res",title)
+      const result = res.filter(res => res.deleted !== "true" );
+      setTitle(result)
+      console.log(result)
     })
     return () => { ignore = true; }
     },[]);

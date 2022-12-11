@@ -1,0 +1,29 @@
+#side-menu {
+    min-width: 180px;
+    max-width: 180px;
+  }
+  
+  .content {
+    width: 100%;
+    min-height: 100%;
+  }
+  
+  .time-font {
+    font-size: small;
+  }
+  
+  .gridWrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 10fr);
+    gap: 10px;
+  }
+  
+  .blockimg {
+    width: 100px;
+    height: 200px;
+  }
+  
+  .searchbtn {
+    margin-left: 0.5rem;
+  }
+  

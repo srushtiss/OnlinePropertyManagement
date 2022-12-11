@@ -4,7 +4,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.css';
 import { CookiesProvider } from "react-cookie";
+import { ReactSession } from 'react-client-session';
 
+ReactSession.setStoreType("Cookie");
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
