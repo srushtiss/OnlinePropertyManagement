@@ -16,32 +16,20 @@ export  async function callApi({
     }
     console.log('body', body)
 
-    let res =  await fetch(url, {
+    return await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
         // mode: 'no-cors',
         body: JSON.stringify(body)
     })
-    return res.json() || res.text();
-    // let data = await res.json();
-    // console.log(data);
-    // return data
-
-    // return await fetch(url, {
-    //     method,
-    //     headers: { 'Content-Type': 'application/json' },
-    //     // mode: 'no-cors',
-    //     body: JSON.stringify(body)
-    // })
-    //     .then(async (response) => {
-    //         if (!response.ok) {
-    //             alert('An error Occured. Please verify the inputs/operation you are trying to perform.')
-    //             return response.json()
-    //                 ``
-    //                 .then((json) => {
-    //                     return Promise.reject(json)
-    //                 });
-    //         }
-    //         return response.json() || response.text();
-    //     });
+        .then(async (response) => {
+            if (!response.ok) {
+                // alert('An error Occured. Please verify the inputs/operation you are trying to perform.')
+                return response.json()
+                    .then((json) => {
+                        return Promise.reject(json)
+                    });
+            }
+            return response.json() || response.text();
+        });
 }

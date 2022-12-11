@@ -56,49 +56,44 @@ export default function (props) {
   }
 
 
-  const submit = () => {
-
+  const submit = (event) => {
+    event.preventDefault();
     console.log("here")
 
     if (authMode === 'signin' && type === 'user') UserLogin({ email: email, passHash: password }).then((res) => {
       console.log("res ",res.error)
-      alert('Failed authentication')
       setCookie('userType', "user", { path: '/' });
       setCookie('userEmail', email, { path: '/' });
-      if (res.error) {
-        console.log("log in done")
-         alert('Failed authentication')
-      }
-      else navigate('/home')
+      navigate('/home')
+    })
+    .catch((err) =>{
+      alert('Failed authentication')
     })
     if (authMode === 'signin' && type === 'host') HostLogin({ email: email, passHash: password }).then((res) => {
       console.log(res.result)
-      setCookie('userType', "host", { path: '/' });
+      setCookie('userType', "user", { path: '/' });
       setCookie('userEmail', email, { path: '/' });
-      if (res.result === true) {
-
-        // navigate('/home')
-      }
-      else alert('Failed authentication')
+      navigate('/home')
+    })
+    .catch((err) =>{
+      alert('Failed authentication')
     })
     if (authMode === 'signup' && type === 'host') HostSignUp({ firstName: firstName, lastName: lastName, email: email, phone: phone, passHash: password }).then((res) => {
       console.log(res.result)
-      setCookie('userType', "host", { path: '/' });
+      setCookie('userType', "user", { path: '/' });
       setCookie('userEmail', email, { path: '/' });
-      if (res.result === true) {
-
-        // navigate('/home')
-      }
-      else alert('Failed authentication')
+      navigate('/home')
+    })
+    .catch((err) =>{
+      alert('Failed authentication')
     })
     if (authMode === 'signup' && type === 'user') UserSignUp({ firstName: firstName, lastName: lastName, email: email, phone: phone, passHash: password }).then((res) => {
       setCookie('userType', "user", { path: '/' });
       setCookie('userEmail', email, { path: '/' });
-      if (res.result === true) {
-
-        // navigate('/home')
-      }
-      else alert('Failed authentication')
+      navigate('/home')
+    })
+    .catch((err) =>{
+      alert('Failed authentication')
     })
 
   }
@@ -106,7 +101,7 @@ export default function (props) {
   if (authMode === "signin") {
     return (
       <>
-        <form className="row g-2 needs-validation justify-content-center" novalidate onSubmit={() => submit()}>
+        <form className="row g-2 needs-validation justify-content-center" novalidate onSubmit={submit}>
           <div className="Auth-form-content">
             <h3 className="Auth-form-title">Sign In</h3>
             <div className="text-center signContent">
@@ -175,7 +170,7 @@ export default function (props) {
 
   return (
     <>
-      <form className="row g-2 needs-validation justify-content-center" novalidate onSubmit={() => submit()}>
+      <form className="row g-2 needs-validation justify-content-center" novalidate onSubmit={ submit}>
         <div className="Auth-form-content">
           <h3 className="Auth-form-title">Sign Up</h3>
           <div className="text-center signContent">

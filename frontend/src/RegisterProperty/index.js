@@ -24,20 +24,23 @@ function RegisterProperty() {
   const [map_address, setAddress] = useState("")
 
 
-  const submit = () => {
+  const submit = (event) => {
+    event.preventDefault();
 
     console.log("here")
-    RegisterHostProperty({email:cookies.userEmail, title:title, city:city, category:category, description:description, nightly_fee:nightly_fee, cleaning_fee:cleaning_fee, service_fee:service_fee, amenities:amenities, bedrooms:bedrooms, img:"sad", map_address:"asd"}).then((res) => {
-      if (res.result === true) {
+    RegisterHostProperty({ email: cookies.userEmail, title: title, city: city, category: category, description: description, nightly_fee: nightly_fee, cleaning_fee: cleaning_fee, service_fee: service_fee, amenities: amenities, bedrooms: bedrooms, img: "sad", map_address: "asd" }).then((res) => {
+
+      if (res.message === "New property added") {
         navigate('/home')
       }
       else alert('Failed to host property')
     })
     console.log("here")
   }
+  if (cookies.userType === "host") {
     return (
       <>
-        <form className="row g-2 needs-validation justify-content-center" novalidate onSubmit={() => submit()}>
+        <form className="row g-2 needs-validation justify-content-center" novalidate onSubmit={submit}>
           <div className="Auth-form-content">
             <h3 className="Auth-form-title">Register you Property today!</h3>
           </div>
@@ -123,7 +126,7 @@ function RegisterProperty() {
               onChange={(e) => setBedrooms(e.target.value)}
               id="validation" required />
           </div>
-          
+
           <div className="col-md-5">
             <label htmlFor="validation" className="form-label">Image</label>
             <input
@@ -135,7 +138,7 @@ function RegisterProperty() {
           </div>
           <div className="col-md-10">
             <label htmlFor="validation" className="form-label">Description</label>
-            <textarea 
+            <textarea
               type="textbox"
               className="form-control"
               placeholder="Description"
@@ -149,7 +152,17 @@ function RegisterProperty() {
       </>
 
     )
-  
+
+  }
+  else {
+    return (
+      <>
+        <div className="Auth-form-content">
+          <h3 className="Auth-form-title">Only Hosts can register their properties!!</h3>
+        </div>
+      </>
+    )
+  }
 }
 
 export default RegisterProperty

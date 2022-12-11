@@ -36,7 +36,7 @@ router.post('/login', (req, res, next) => {
         .then(user => {
             if (!user)
                 return res.status(401).send({
-                    error: 'Authentication failed'
+                    message: 'Authentication failed'
                 });
             else {
                 if (loginUser.passHash === user.passHash) {
@@ -47,7 +47,7 @@ router.post('/login', (req, res, next) => {
                 }
                 else {
                     return res.status(401).send({
-                        error: 'Authentication failed'
+                        message: 'Authentication failed'
                     });
                 }
             }
@@ -63,7 +63,7 @@ router.post('/getUser', (req, res, next) => {
     User.findOne({ email: userEmail })
         .then(result => {
             (result) ? res.status(200).send({ message: "Good" }) :
-                res.status(400).send({ error: "Email does not exist" });
+                res.status(400).send({ message: "Email does not exist" });
         })
         .catch(err => res.status(400).send({
             error: err.message

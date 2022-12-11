@@ -20,6 +20,25 @@ function LoginButton() {
   }
 }
 
+
+function LogoutButton() {
+
+
+  // const [username, setCookie, removeCookie] = useCookies(['userName']);
+  const [cookies, setCookie] = useCookies(['user']);
+
+  const logout = ()=>{
+    setCookie('userType', "", { path: '/' });
+    setCookie('userEmail', "", { path: '/' });  
+  }
+
+  // if (username.userName.length === 0 || username.userName === null) {
+    if (cookies.userEmail.length !== 0) {
+    return (<> <a className="dropdown-item" onClick={logout()}>Logout</a></>);
+  }
+  else return (<></>)
+}
+
 function NavBarTop() {
 
   return (
@@ -48,6 +67,7 @@ function NavBarTop() {
                 <div className="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
                   <LoginButton />
                   <a className="dropdown-item" href="/reservations">My Reservations</a>
+                  <LogoutButton />
                 </div>
               </li>
             </ul>

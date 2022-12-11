@@ -28,9 +28,9 @@ function HomePage() {
 
   return (
     <div>
-      <div class="input-group mb-3 justify-content-center">
-        <form class="form-inline my-2 my-xl-0">
-          <input class="form-control mr-xl-2 " type="search" placeholder="Search" aria-label="Search" onChange={(event) => {
+      <div className="input-group mb-3 justify-content-center">
+        <form className="form-inline my-2 my-xl-0">
+          <input className="form-control mr-xl-2 " type="search" placeholder="Search" aria-label="Search" onChange={(event) => {
             if (event.target.value == "") {
               setTitle(properties)
             }
@@ -39,17 +39,17 @@ function HomePage() {
             }
           }} />
         </form>
-        <div class="input-group-prepend">
-          <button class="btn searchbtn btn-outline-primary " type="button" >Search</button>
+        <div className="input-group-prepend">
+          <button className="btn searchbtn btn-outline-primary " type="button" >Search</button>
         </div>
       </div>
       <br />
-        <div class="row justify-content-center">
-          <div class="col-md-10 properties">
-            <div class="container-fluid">
-              <div class="container-fluid text-center">
-                <div class="row">
-                  <div class="col gridWrapper">
+        <div className="row justify-content-center">
+          <div className="col-md-10 properties">
+            <div className="container-fluid">
+              <div className="container-fluid text-center">
+                <div className="row">
+                  <div className="col gridWrapper">
                     {
                       title.map(item => {
                         return (<PropertyCards {...item} >
