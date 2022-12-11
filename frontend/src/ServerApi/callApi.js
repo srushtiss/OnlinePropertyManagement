@@ -1,9 +1,9 @@
 import fetch from 'isomorphic-fetch';
 
 
-export async function callApi({
+export  async function callApi({
     endpoint,
-    method = 'get',
+    method = 'post',
     body = undefined,
     fullUrl = false
 }) {
@@ -12,26 +12,36 @@ export async function callApi({
     if (fullUrl) {
         url = endpoint;
     } else {
-        url = `localhost:3000/${endpoint}`; // put you local ip address here
+        url = `http://192.168.1.143:4000/${endpoint}`; // put you local ip address here
     }
     console.log('body', body)
 
-    return await fetch(url, {
+    let res =  await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
         // mode: 'no-cors',
         body: JSON.stringify(body)
     })
-        .then(async (response) => {
-            console.log("rewspopsnerasdflkm ",response)
-            if (!response.ok) {
-                alert('An error Occured. Please verify the inputs/operation you are trying to perform.')
-                return response.json()
-                    ``
-                    .then((json) => {
-                        return Promise.reject(json)
-                    });
-            }
-            return response.json() || response.text();
-        });
+    return res.json() || res.text();
+    // let data = await res.json();
+    // console.log(data);
+    // return data
+
+    // return await fetch(url, {
+    //     method,
+    //     headers: { 'Content-Type': 'application/json' },
+    //     // mode: 'no-cors',
+    //     body: JSON.stringify(body)
+    // })
+    //     .then(async (response) => {
+    //         if (!response.ok) {
+    //             alert('An error Occured. Please verify the inputs/operation you are trying to perform.')
+    //             return response.json()
+    //                 ``
+    //                 .then((json) => {
+    //                     return Promise.reject(json)
+    //                 });
+    //         }
+    //         return response.json() || response.text();
+    //     });
 }

@@ -2,10 +2,22 @@ import React, { useEffect, useState } from "react";
 import PropertyCards from "../card";
 import properties from "../properties";
 import './index.css'
+import {GetProperties} from "../ServerApi"
 
 
 function HomePage() {
-  const [title, setTitle] = useState(properties)
+  const [title, setTitle] = useState([])
+
+  useEffect(() => {
+    let ignore = false;
+    
+    if (!ignore)  GetProperties().then((res)=>{
+      setTitle(res)
+      console.log("Res",title)
+    })
+    return () => { ignore = true; }
+    },[]);
+
   const [searchText, setSearchText] = useState("")
 
   useEffect(() => {

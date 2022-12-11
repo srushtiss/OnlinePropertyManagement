@@ -11,18 +11,18 @@ router.post('/register', (req, res, next) => {
     console.log(req.body)
 
     const email = req.body.email
-    const password = req.body.password
+    const passHash = req.body.passHash
     const firstName = req.body.firstName
     const lastName = req.body.lastName
     const phone = req.body.phone
 
 
     const newUser = new User({
-        firstName, lastName, email, password, phone
+        firstName, lastName, email, passHash, phone
     })
 
     newUser.save()
-        .then(() => res.json('New property added'))
+        .then(() => res.json('New user added'))
         .catch((err) => res.status(400).json(err))
 
 }
@@ -30,6 +30,7 @@ router.post('/register', (req, res, next) => {
 
 // Login
 router.post('/login', (req, res, next) => {
+    console.log(req.body)
     let loginUser = req.body;
     User.findOne({ email: loginUser.email })
         .then(user => {
@@ -38,23 +39,7 @@ router.post('/login', (req, res, next) => {
                     error: 'Authentication failed'
                 });
             else {
-                // bcrypt.compare(loginUser.password, user.password, (err, result) => {
-                //     if (err || !result)
-                //         return res.status(401).send({ 
-                //             error: 'Authentication failed' 
-                //         });
-                //     else {
-                //         const token = jwt.createToken({ 
-                //             userId: user._id
-                //         });
-                //         return res.status(200).send({ 
-                //             message: 'Authentication successful',
-                //             token: token
-                //         });
-                //     }
-                // });
-
-                if (loginUser.password === user.password) {
+                if (loginUser.passHash === user.passHash) {
                     return res.status(200).send({
                         message: 'Authentication successful',
                     });

@@ -3,10 +3,11 @@ const cors=require('cors')
 const mongoose=require('mongoose')
 const properties=require('./routes/properties')
 const user = require('./routes/user')
+const host = require('./routes/host')
 const reservation=require('./routes/reservation')
 require('dotenv').config()
 
-const port=process.env.PORT || 3000
+const port=process.env.PORT || 4000
 
 const app=express()
 app.use(express.json())
@@ -28,5 +29,6 @@ connection.once('open',()=>{
 })
 app.use('/properties',properties)
 app.use('/user', user)
+app.use('/host', host)
 app.use('/reservation', reservation)
 app.listen(port,console.log(`Server is listening on port ${port}`))

@@ -10,14 +10,15 @@ import { useCookies } from "react-cookie";
 
 export default function (props) {
   let [authMode, setAuthMode] = useState("signin")
+
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
   const [email, setEmail] = useState("")
   const [phone, setPhone] = useState("")
   const [password, setPassword] = useState("")
   const [type, setType] = useState("")
-  const [username, setUserName, removeUserName] = useCookies(['userName']);
-  const [userType, setUserType, removeUserType] = useCookies(['userType']);
+  const [cookies, setCookie] = useCookies(['user']);
+
 
   const navigate = useNavigate()
   const changeAuthMode = () => {
@@ -57,79 +58,85 @@ export default function (props) {
 
   const submit = () => {
 
-
     console.log("here")
-    if (authMode === 'signin' && type === 'user') UserLogin(email, password).then((res) => {
-      console.log(res.result)
-      if (res.result === true) {
-        setUserName(email)
-        setUserType("user")
-        navigate('/', { state: { username: res.username } })
-      }
-      else alert('Failed authentication')
-    })
-    if (authMode === 'signin' && type === 'host') HostLogin(email, password).then((res) => {
-      console.log(res.result)
 
-      if (res.result === true) {
-        setUserName(email)
-        setUserType("host")
-        navigate('/', { state: { username: res.username } })
+    if (authMode === 'signin' && type === 'user') UserLogin({ email: email, passHash: password }).then((res) => {
+      console.log("res ",res.error)
+      alert('Failed authentication')
+      setCookie('userType', "user", { path: '/' });
+      setCookie('userEmail', email, { path: '/' });
+      if (res.error) {
+        console.log("log in done")
+         alert('Failed authentication')
       }
-      else alert('Failed authentication')
+      else navigate('/home')
     })
-    if (authMode === 'signup' && type === 'host') HostSignUp(email, password).then((res) => {
+    if (authMode === 'signin' && type === 'host') HostLogin({ email: email, passHash: password }).then((res) => {
       console.log(res.result)
+      setCookie('userType', "host", { path: '/' });
+      setCookie('userEmail', email, { path: '/' });
       if (res.result === true) {
-        setUserName(email)
-        setUserType("host")
-        navigate('/', { state: { username: res.username } })
+
+        // navigate('/home')
       }
       else alert('Failed authentication')
     })
-    else UserSignUp(firstName, lastName, email, phone, password).then((res) => {
+    if (authMode === 'signup' && type === 'host') HostSignUp({ firstName: firstName, lastName: lastName, email: email, phone: phone, passHash: password }).then((res) => {
+      console.log(res.result)
+      setCookie('userType', "host", { path: '/' });
+      setCookie('userEmail', email, { path: '/' });
       if (res.result === true) {
-        setUserName(email)
-        setUserType("user")
-        // navigate('/', { state: { username: res.username } })
+
+        // navigate('/home')
       }
       else alert('Failed authentication')
     })
+    if (authMode === 'signup' && type === 'user') UserSignUp({ firstName: firstName, lastName: lastName, email: email, phone: phone, passHash: password }).then((res) => {
+      setCookie('userType', "user", { path: '/' });
+      setCookie('userEmail', email, { path: '/' });
+      if (res.result === true) {
+
+        // navigate('/home')
+      }
+      else alert('Failed authentication')
+    })
+
   }
+
   if (authMode === "signin") {
     return (
       <>
-        <form class="row g-2 needs-validation justify-content-center" novalidate>
+        <form className="row g-2 needs-validation justify-content-center" novalidate onSubmit={() => submit()}>
           <div className="Auth-form-content">
-            <h3 className="Auth-form-title">Sign Up</h3>
+            <h3 className="Auth-form-title">Sign In</h3>
             <div className="text-center signContent">
               Not registered yet?{" "}
               <span className="link-primary" onClick={changeAuthMode}>
                 Sign Up
               </span>
             </div>
-            <div class="form-check form-check-inline radioType" onChange={(e) => {
+            <div className="form-check form-check-inline radioType" onChange={(e) => {
               console.log(e.target.value)
               setType(e.target.value)
             }
             } >
-              <input class="form-check-input " type="radio" value="user" name="type" required />
-              <label class="form-check-label" for="flexRadioDefault1">
+              <input className="form-check-input " type="radio" value="user" name="type" required />
+              <label className="form-check-label" htmlFor="flexRadioDefault1">
                 User
               </label>
 
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" value="host" name="type" />
-                <label class="form-check-label" for="flexRadioDefault2">
+              <div className="form-check form-check-inline">
+                <input className="form-check-input" type="radio" value="host" name="type" />
+                <label className="form-check-label" htmlFor="flexRadioDefault2">
                   Host
                 </label>
               </div>
             </div>
           </div>
-          <div class="col-md-3">
-            <label for="validationEmail" class="form-label">Email ID</label>
-            <div class="input-group has-validation">
-              <input type="email" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required
+          <div className="col-md-3">
+            <label htmlFor="validationEmail" className="form-label">Email ID</label>
+            <div className="input-group has-validation">
+              <input type="email" className="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required
                 value={email}
                 placeholder="Email"
                 onChange={(e) => {
@@ -137,16 +144,16 @@ export default function (props) {
                   setEmail(e.target.value)
                 }}
               />
-              <div class="invalid-feedback">
+              <div className="invalid-feedback">
                 Please enter a valid email id.
               </div>
             </div>
           </div>
-          <div class="col-md-3">
-            <label for="validationCustom05" class="form-label">Password</label>
+          <div className="col-md-3">
+            <label htmlFor="validationCustom05" className="form-label">Password</label>
             <input
               type="password"
-              class="form-control"
+              className="form-control"
               placeholder="Password"
               onChange={(e) => {
                 // validateField("password", e.target.value)
@@ -157,11 +164,8 @@ export default function (props) {
               {passwordError}
             </div>
           </div>
-          <div className="form-group">
-
-            <div class="submitBtn">
-              <button class="btn btn-primary " type="submit" onClick={submit()}>Submit</button>
-            </div>
+          <div className="submitBtn">
+            <button className="btn btn-primary " type="submit" >Submit</button>
           </div>
         </form>
       </>
@@ -171,7 +175,7 @@ export default function (props) {
 
   return (
     <>
-      <form class="row g-2 needs-validation justify-content-center" novalidate>
+      <form className="row g-2 needs-validation justify-content-center" novalidate onSubmit={() => submit()}>
         <div className="Auth-form-content">
           <h3 className="Auth-form-title">Sign Up</h3>
           <div className="text-center signContent">
@@ -180,44 +184,44 @@ export default function (props) {
               Sign In
             </span>
           </div>
-          <div class="form-check form-check-inline radioType" onChange={(e) => {
+          <div className="form-check form-check-inline radioType" onChange={(e) => {
             console.log(e.target.value)
             setType(e.target.value)
           }
           } >
-            <input class="form-check-input " type="radio" value="user" name="type" required />
-            <label class="form-check-label" for="flexRadioDefault1">
+            <input className="form-check-input " type="radio" value="user" name="type" required />
+            <label className="form-check-label" htmlFor="flexRadioDefault1">
               User
             </label>
 
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" value="host" name="type" />
-              <label class="form-check-label" for="flexRadioDefault2">
+            <div className="form-check form-check-inline">
+              <input className="form-check-input" type="radio" value="host" name="type" />
+              <label className="form-check-label" htmlFor="flexRadioDefault2">
                 Host
               </label>
             </div>
           </div>
         </div>
-        <div class="col-md-5">
-          <label for="validationFirstName" class="form-label">First Name</label>
-          <input type="text" class="form-control" id="validationCustom01" required
+        <div className="col-md-5">
+          <label htmlFor="validationFirstName" className="form-label">First Name</label>
+          <input type="text" className="form-control" id="validationCustom01" required
             value={firstName}
             placeholder="First Name"
             onChange={(e) => setFirstName(e.target.value)}
           />
         </div>
-        <div class="col-md-5">
-          <label for="validationLastName" class="form-label">Last Name</label>
-          <input type="text" class="form-control" id="validationCustom02" required
+        <div className="col-md-5">
+          <label htmlFor="validationLastName" className="form-label">Last Name</label>
+          <input type="text" className="form-control" id="validationCustom02" required
             value={lastName}
             placeholder="Last Name"
             onChange={(e) => setLastName(e.target.value)}
           />
         </div>
-        <div class="col-md-5">
-          <label for="validationEmail" class="form-label">Email ID</label>
-          <div class="input-group has-validation">
-            <input type="email" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required
+        <div className="col-md-5">
+          <label htmlFor="validationEmail" className="form-label">Email ID</label>
+          <div className="input-group has-validation">
+            <input type="email" className="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required
               value={email}
               placeholder="Email"
               onChange={(e) => {
@@ -225,29 +229,29 @@ export default function (props) {
                 setEmail(e.target.value)
               }}
             />
-            <div class="invalid-feedback">
+            <div className="invalid-feedback">
               Please enter a valid email id.
             </div>
           </div>
         </div>
-        <div class="col-md-5">
-          <label for="validationCustom03" class="form-label">Phone</label>
-          <input class="form-control"
+        <div className="col-md-5">
+          <label htmlFor="validationCustom03" className="form-label">Phone</label>
+          <input className="form-control"
             type="number"
             value={phone}
             placeholder="Phone Number"
             onChange={(e) => setPhone(e.target.value)}
             required />
-          <div class="invalid-feedback">
+          <div className="invalid-feedback">
             Please enter a valid Number.
           </div>
         </div>
 
-        <div class="col-md-5">
-          <label for="validationCustom05" class="form-label">Password</label>
+        <div className="col-md-5">
+          <label htmlFor="validationCustom05" className="form-label">Password</label>
           <input
             type="password"
-            class="form-control"
+            className="form-control"
             placeholder="Password"
             onChange={(e) => {
               validateField("password", e.target.value)
@@ -258,11 +262,12 @@ export default function (props) {
             {passwordError}
           </div>
         </div>
-
-        <div class="submitBtn">
-          <button class="btn btn-primary " type="submit" onClick={submit()}>Submit</button>
+        <div className="submitBtn">
+          <button className="btn btn-primary " type="submit" >Submit</button>
         </div>
+
       </form>
+
     </>
   )
 }

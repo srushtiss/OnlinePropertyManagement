@@ -1,7 +1,11 @@
 const mongoose = require('mongoose');
 
 const propertySchema = new mongoose.Schema({
-    name: {
+    email: {
+        type: String,
+        required: true
+    },
+    title: {
         type: String,
         required: true,
     },
@@ -9,15 +13,15 @@ const propertySchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    type: {
+    category: {
         type: String,
         required: true,
     },
-    cleaning: {
+    cleaning_fee: {
         type: Number,
         required: true,
     },
-    service: {
+    service_fee: {
         type: Number,
         required: true,
     },
@@ -29,16 +33,16 @@ const propertySchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    image: {
+    img: {
         type: String,
     },
-    price: {
-        type: [Number],
+    nightly_fee: {
+        type: Number,
         required: true,
     },
-    desc: {
+    description: {
         type: String,
     }
 });
 
-module.exports = mongoose.model('', propertySchema);
+module.exports = mongoose.model('property', propertySchema);

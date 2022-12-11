@@ -9,19 +9,21 @@ router.route('/').get((req,res)=>{
 
 router.route('/add').post((req,res)=>{
     console.log(JSON.stringify(req.fields))
-    const name=req.body.name
+
+    const email=req.body.email
+    const title=req.body.title
     const city=req.body.city
-    const type=req.body.type
-    const cleaning=Number(req.body.cleaning)
-    const service=Number(req.body.service)
+    const category=req.body.category
+    const cleaning_fee=Number(req.body.cleaning_fee)
+    const service_fee=Number(req.body.service_fee)
     const amenities=req.body.amenities
     const bedrooms=Number(req.body.bedrooms)
-    const image=req.body.image
-    const price=Number(req.body.price)
-    const desc=req.body.desc
+    const img=req.body.img
+    const nightly_fee=Number(req.body.nightly_fee)
+    const description=req.body.description
 
     const newProperty=new Property({
-        name,city,type,cleaning,service,amenities,bedrooms,image,price,desc
+        title,city,category,cleaning_fee,service_fee,amenities,bedrooms,img,nightly_fee,description
     })
 
     newProperty.save()
@@ -38,16 +40,16 @@ router.route('/:id').get((req,res)=>{
 router.route('/update/:id').post((req,res)=>{
     Property.findById(req.params.id)
     .then(property=>{
-        property.name=req.body.name
+        property.title=req.body.title
         property.city=req.body.city
-        property.type=req.body.type
-        property.cleaning=Number(req.body.cleaning)
-        property.service=Number(req.body.service)
+        property.category=req.body.category
+        property.cleaning_fee=Number(req.body.cleaning_fee)
+        property.service_fee=Number(req.body.service_fee)
         property.amenities=req.body.amenities
         property.bedrooms=Number(req.body.bedrooms)
-        property.image=req.body.image
-        property.price=Number(req.body.price)
-        property.desc=req.body.desc
+        property.img=req.body.img
+        property.nightly_fee=Number(req.body.nightly_fee)
+        property.description=req.body.description
 
         property.save()
         .then(()=>res.json('Property updated'))
