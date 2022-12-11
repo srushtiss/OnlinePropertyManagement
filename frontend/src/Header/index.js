@@ -72,7 +72,7 @@ function NavBarTop() {
                   <a className="dropdown-item" href="/login">Login</a>
                   <a className="dropdown-item" href="/reservations">My Reservations</a>
                   <a className="dropdown-item" href="/favourites">My Favourites</a>
-                  <LogoutButton />
+                  {/* <LogoutButton /> */}
                 </div>
               </li>
             </ul>

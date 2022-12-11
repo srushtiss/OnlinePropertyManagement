@@ -68,13 +68,13 @@ function PropertyCards(props) {
     
     // }
     const toggleFavorite=()=>{
-        if(document.getElementById('fav-btn').textContent==="Add to Favourite"){
+        if(document.getElementById('fav-btn').textContent==="Favourite"){
             localStorage.setItem("fav-property",props.title)
-            document.getElementById("fav-btn").textContent="Remove favourite"
+            document.getElementById("fav-btn").textContent="Remove fav"
         }
         else{
             localStorage.removeItem("fav-property")
-            document.getElementById("fav-btn").textContent="Add to favourite"
+            document.getElementById("fav-btn").textContent="Favourite"
         }
 
     }
@@ -103,7 +103,7 @@ function PropertyCards(props) {
 
                     <div class="card-body">
                         <a href="#" onClick={() => { setModalShow(true) }} class="btn btn-outline-secondary card-link">View Property</a>
-                        <button href="#" onClick={(e) => { toggleFavorite()}} id="fav-btn" class="btn btn-outline-secondary card-link">Add to Favourite</button>
+                        <button href="#" onClick={(e) => { toggleFavorite()}} id="fav-btn" class="btn btn-outline-secondary card-link">Favourite</button>
                     </div>
                 </div>
 
