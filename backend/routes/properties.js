@@ -1,5 +1,7 @@
-const router = require('express').Router()
-const Property = require('../models/property.model')
+const router=require('express').Router()
+const Property=require('../models/property.model')
+const multer=require('multer')
+const upload=multer({dest:'uploads/'})
 
 router.route('/').get((req, res) => {
     Property.find()
@@ -9,20 +11,22 @@ router.route('/').get((req, res) => {
 
 router.route('/add').post((req, res) => {
     console.log(JSON.stringify(req.fields))
-    const email = req.body.email
-    const title = req.body.title
-    const city = req.body.city
-    const category = req.body.category
-    const cleaning_fee = Number(req.body.cleaning_fee)
-    const service_fee = Number(req.body.service_fee)
-    const amenities = req.body.amenities
-    const bedrooms = Number(req.body.bedrooms)
-    const img = req.body.img
-    const nightly_fee = Number(req.body.nightly_fee)
-    const description = req.body.description
+
+    const email=req.body.email
+    const title=req.body.title
+    const city=req.body.city
+    const category=req.body.category
+    const cleaning_fee=Number(req.body.cleaning_fee)
+    const service_fee=Number(req.body.service_fee)
+    const amenities=req.body.amenities
+    const bedrooms=Number(req.body.bedrooms)
+    const img=req.file
+    const nightly_fee=Number(req.body.nightly_fee)
+    const description=req.body.description
     const deleted = req.body.deleted
-    const newProperty = new Property({
-        email, title, city, category, cleaning_fee, service_fee, amenities, bedrooms, img, nightly_fee, description, deleted
+
+    const newProperty=new Property({
+        title,city,category,cleaning_fee,service_fee,amenities,bedrooms,img,nightly_fee,description, deleted
     })
     newProperty.save()
         .then(() => res.json('New property added'))

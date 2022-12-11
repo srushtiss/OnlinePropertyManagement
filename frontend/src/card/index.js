@@ -54,18 +54,29 @@ function MyVerticallyCenteredModal(props) {
 
 
 function PropertyCards(props) {
-    const [favorite, setFavorite] = useState("Favorite Me")
+    // const [favorite, setFavorite] = useState("Favorite Me")
     const [modalShow, setModalShow] = useState(false);
     const [username, setCookie, removeCookie] = useCookies(['userName']);
 
-    const addFavorite = (props) => {
-        AddToFavorites(username.userName, props.title).then((res) => {
-            if (res.result === true) {
-                setFavorite("Added!")
-            }
-            else alert('Failed authentication')
-          })
+    // const addFavorite = (props) => {
+    //     AddToFavorites(username.userName, props.title).then((res) => {
+    //         if (res.result === true) {
+                
+    //         }
+    //         else alert('Failed authentication')
+    //       })
     
+    // }
+    const toggleFavorite=()=>{
+        if(document.getElementById('fav-btn').textContent==="Add to Favourite"){
+            localStorage.setItem("fav-property",props.title)
+            document.getElementById("fav-btn").textContent="Remove favourite"
+        }
+        else{
+            localStorage.removeItem("fav-property")
+            document.getElementById("fav-btn").textContent="Add to favourite"
+        }
+
     }
     return (
         <>
@@ -90,9 +101,9 @@ function PropertyCards(props) {
                         </div>
                     </div>
 
-                    <div className="card-body">
-                        <a href="#" onClick={() => { setModalShow(true) }} className="btn btn-outline-secondary card-link">View Property</a>
-                        <a href="#" onClick={(e) => { addFavorite(props, username.userName) }} className="btn btn-outline-secondary card-link">{favorite}</a>
+                    <div class="card-body">
+                        <a href="#" onClick={() => { setModalShow(true) }} class="btn btn-outline-secondary card-link">View Property</a>
+                        <button href="#" onClick={(e) => { toggleFavorite()}} id="fav-btn" class="btn btn-outline-secondary card-link">Add to Favourite</button>
                     </div>
                 </div>
 

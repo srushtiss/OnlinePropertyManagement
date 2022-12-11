@@ -11,6 +11,8 @@ import { useCookies } from "react-cookie";
 import RegisterProperty from './RegisterProperty';
 import { ReactSession } from 'react-client-session';
 import HostProperties from './hostProperties';
+import Favourites from './Favourites';
+
 
 
 function App() {
@@ -24,6 +26,8 @@ function App() {
           <Route exact path='/registerproperty' element={<RegisterProperty />} />
           <Route exact path='/myproperties' element={<HostProperties />} />
           <Route exact path='/login' element={<Login />} />
+          <Route exact path='/favourites' element={<Favourites/>}/>
+
         </Routes >
       </div>
       <Footer />
