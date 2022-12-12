@@ -9,7 +9,7 @@ import { ReactSession } from 'react-client-session';
 
 
 function RegisterProperty() {
-  const [cookies, setCookie] = useCookies(['user']);
+  const userEmail = ReactSession.get("userEmail");
 
   const navigate = useNavigate()
   const [title, setTitle] = useState("")
@@ -27,7 +27,6 @@ function RegisterProperty() {
 
   const submit = (event) => {
     event.preventDefault();
-    let userEmail = ReactSession.get("userEmail");
 
     console.log("here")
     RegisterHostProperty({ email: userEmail, title: title, city: city, category: category, description: description, nightly_fee: nightly_fee, cleaning_fee: cleaning_fee, service_fee: service_fee, amenities: amenities, bedrooms: bedrooms, img: "sad", map_address: "asd", deleted:"false" })

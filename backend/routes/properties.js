@@ -67,12 +67,11 @@ router.route('/update/:id').post((req, res) => {
                 .then(() => res.json('Property updated'))
                 .catch((err) => res.status(400).json('Error:' + err))
         })
-        .catch((err) => res.status(400).json('Error' + err))
 })
 
 router.route('/:id').delete((req, res) => {
     Property.findByIdAndDelete(req.params.id)
-        .then(() => res.json('Property Deleted'))
+        .then(() => res.json('Property Updated'))
         .catch((err) => res.status(400).json('Error' + err))
 })
 module.exports = router

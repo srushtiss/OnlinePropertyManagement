@@ -23,6 +23,7 @@ export  async function callApi({
         body: JSON.stringify(body)
     })
         .then(async (response) => {
+            console.log("asdf",response)
             if (!response.ok) {
                 // alert('An error Occured. Please verify the inputs/operation you are trying to perform.')
                 return response.json()

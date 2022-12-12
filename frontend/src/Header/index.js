@@ -43,6 +43,15 @@ import { ReactSession } from 'react-client-session';
 //   else return (<></>)
 // }
 
+function HostProperties(){
+  let userType = ReactSession.get("userType");
+  if (userType === "host" ){
+    return (<> <a className="dropdown-item" href="/myproperties">My Properties</a></>);
+  }
+
+
+}
+
 function NavBarTop() {
 
   return (
@@ -72,7 +81,7 @@ function NavBarTop() {
                   <a className="dropdown-item" href="/login">Login</a>
                   <a className="dropdown-item" href="/reservations">My Reservations</a>
                   <a className="dropdown-item" href="/favourites">My Favourites</a>
-                  {/* <LogoutButton /> */}
+                  <HostProperties />
                 </div>
               </li>
             </ul>
